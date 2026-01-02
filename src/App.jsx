@@ -10,8 +10,12 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 export const App = () => {
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: "/Home",
       element: <ProductList />,
+    },
+    {
+      path: "/productDetail/:id",
+      element: <ProductDetail />,
     },
     {},
   ]);

@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Filter } from "lucide-react";
 
 const cartSlice = createSlice({
   name: "cart",
@@ -9,8 +10,13 @@ const cartSlice = createSlice({
     addToCart: (state, action) => {
       state.cartItems.push(action.payload);
     },
+    removeFromCart: (state, action) => {
+      state.cartItems = state.cartItems.filter(
+        (item) => item.id !== action.payload
+      );
+    },
   },
 });
 
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, removeFromCart } = cartSlice.actions;
 export default cartSlice.reducer;
