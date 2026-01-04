@@ -2,13 +2,18 @@ import React, { useEffect, useState } from "react";
 import { InitialProducts } from "../Data/Product";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { ChevronLeft } from "lucide-react";
-import { Tag } from "lucide-react";
-import { Zap } from "lucide-react";
-import { ShoppingCart } from "lucide-react";
+import { Zap, ShoppingCart, Tag, ChevronLeft } from "lucide-react";
+
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart } from "../Store/CartSlice";
+
 const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+
+  const cart = useSelector((state) => state.cart.cartItems);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     setProduct(InitialProducts.find((product) => product.id == Number(id)));
   }, [id]);
@@ -36,7 +41,7 @@ const ProductDetail = () => {
               <img
                 src={product.image}
                 alt={product.name}
-                className="w-[400px] h-[500px] object-cover rounded-2xl shadow-gray-950/90 border-4 border-gray-800"
+                className="w-[500px] h-[460px] object-cover rounded-2xl shadow-gray-950/90 border-4 border-gray-800"
               />
             </div>
             <div className="flex flex-col justify-between ">
@@ -69,8 +74,11 @@ const ProductDetail = () => {
               </ul>
               <div className="flex flex-col gap-4 pt-4 pb-8">
                 <button
+                  onClick={() => {
+                    dispatch(addToCart(product));
+                  }}
                   className="max-auto w-full py-3 bg-orange-500 text-white font-bold rounded-full shadow-lg shadow-orange-800/50 cursor-pointer 
-            hover:bg-orangle-700 transition duration-300 flex items-center justify-center space-x-2  transofrm hover:ring-4  hove:ring-pink-400/30 uppercase tracking-wider"
+            hover:bg-orangle-700 transition duration-300 flex items-center justify-center space-x-2  transform hover:ring-4  hove:ring-pink-400/30 uppercase tracking-wider"
                 >
                   <ShoppingCart className="h-6 w-6" />
                   <span>Add to cart</span>

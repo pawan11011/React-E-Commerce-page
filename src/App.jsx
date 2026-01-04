@@ -15,9 +15,22 @@ export const App = () => {
     },
     {
       path: "/productDetail/:id",
-      element: <ProductDetail />,
+      element: (
+        <>
+          <NavBar />
+          <ProductDetail />
+        </>
+      ),
     },
-    {},
+    {
+      path: "/cart",
+      element: (
+        <>
+          <NavBar />
+          <Cart />
+        </>
+      ),
+    },
   ]);
   return <RouterProvider router={router} />;
 };

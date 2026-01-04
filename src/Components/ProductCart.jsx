@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import { InitialProducts } from "../Data/Product";
 import { Link } from "react-router-dom";
 import { ShoppingCartIcon } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../Store/CartSlice";
 
 const ProductCart = () => {
   const [product, setProducts] = useState([]);
+  const Dispatch = useDispatch();
 
   useEffect(() => {
     setProducts(InitialProducts);
@@ -15,11 +18,12 @@ const ProductCart = () => {
         {product.map((product) => (
           <div
             key={product.id}
-            className=" bg-gray-800 rounded-2xl shadow-xl overflow-hidden flex flex-col h-full transition duration-500 transform border border-gray-800 
-          hover:scale-[1.1] hover:shadow-orange-900/40"
+            className="relative z-0 bg-gray-800 rounded-2xl shadow-xl overflow-hidden 
+           flex flex-col h-full transition-transform duration-500 
+           hover:scale-105 hover:shadow-orange-900/40"
           >
             <Link
-              to={`/ProductDetail/${product.id}`}
+              to={`/productDetail/${product.id}`}
               className="relative cursor-pointer overflow-hidden"
             >
               <img
@@ -27,7 +31,7 @@ const ProductCart = () => {
                 alt={product.name}
                 className="w-full h-56 object-cover transition duration-500 group-hover:scale-110 group-hover:opacity-90"
               />
-              <div className="absolute bottom-0 left-0 bg-orange-500/80 text-white  px-5 py-4 font-bold shadow-lg rounded-tr-md">
+              <div className="absolute bottom-0 left-0 bg-orange-500/80 text-white  px-2 py-1 font-bold shadow-lg rounded-tr-md">
                 ₹ {product.price.toFixed(2)}
               </div>
             </Link>
@@ -46,7 +50,8 @@ const ProductCart = () => {
                 </span>
               </div>
               <button
-                className="max-auto w-full py-3 bg-orange-500 text-white font-bold rounded-full shadow-lg shadow-orange-800/50 cursor-pointer hover:bg-orange-700 transition duration-300 flex items-center justify-center gap-2
+                onClick={() => Dispatch(addToCart(product))}
+                className="max-auto w-full py-2 bg-orange-500 text-xs text-white font-bold rounded-full shadow-lg shadow-orange-800/50 cursor-pointer hover:bg-orange-700 transition duration-300 flex items-center justify-center gap-2
               transform hover:ring-4 hover:ring-pink-600/80 uppercase"
               >
                 <ShoppingCartIcon className="w-5 h-5" />
