@@ -2,7 +2,7 @@ import React from "react";
 import NavBar from "./Components/NavBar";
 import ProductList from "./Pages/ProductList";
 import Cart from "./Pages/Cart";
-import CheckOut from "./Pages/CheckOut";
+import Checkout from "./Pages/CheckOut";
 import ProductDetail from "./Pages/ProductDetail";
 import { Footer } from "./Components/Footer";
 
@@ -28,6 +28,15 @@ export const App = () => {
         <>
           <NavBar />
           <Cart />
+        </>
+      ),
+    },
+    {
+      path: "/checkout",
+      element: (
+        <>
+          <NavBar />
+          <Checkout />
         </>
       ),
     },
