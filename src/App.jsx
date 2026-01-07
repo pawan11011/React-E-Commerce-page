@@ -7,6 +7,7 @@ import ProductDetail from "./Pages/ProductDetail";
 import { Footer } from "./Components/Footer";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import OrderConfirmation from "./Pages/OrderConfirmation";
 export const App = () => {
   const router = createBrowserRouter([
     {
@@ -37,6 +38,15 @@ export const App = () => {
         <>
           <NavBar />
           <Checkout />
+        </>
+      ),
+    },
+    {
+      path: "/orderconfirmation",
+      element: (
+        <>
+          <NavBar />
+          <OrderConfirmation />
         </>
       ),
     },
